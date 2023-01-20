@@ -1,4 +1,5 @@
 const express = require("express");
+const fileUpload = require("../middleware/file-upload");
 
 const usersController = require("../controllers/users-controllers");
 
@@ -11,6 +12,8 @@ router.get("/", usersController.getUsers);
 
 router.post(
   "/signup",
+  //multer middleware for file upload
+  fileUpload.single("image"),
   [
     check("name").not().isEmpty(),
     check("email").normalizeEmail().isEmail(),

@@ -8,6 +8,7 @@ const HttpError = require("../models/http-error");
 const { check } = require("express-validator");
 
 const router = express.Router();
+const fileUpload = require("../middleware/file-upload");
 
 //using different controllers for different routes
 
@@ -17,6 +18,7 @@ router.get("/user/:uid", placesControllers.getPlacesByUserId);
 
 router.post(
   "/",
+  fileUpload.single("image"),
   [
     check("title").not().isEmpty(),
     check("description").isLength({ min: 5 }),
