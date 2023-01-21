@@ -9,12 +9,16 @@ const { check } = require("express-validator");
 
 const router = express.Router();
 const fileUpload = require("../middleware/file-upload");
+const checkAuth = require("../middleware/check-auth");
 
 //using different controllers for different routes
 
 router.get("/:pid", placesControllers.getPlaceById);
 
 router.get("/user/:uid", placesControllers.getPlacesByUserId);
+
+//the below line of code will make sure that the checkAuth middleware is executed before the below routes
+router.use(checkAuth);
 
 router.post(
   "/",
