@@ -25,10 +25,10 @@ app.listen(PORT, () => {
   console.log(`Node server is running on PORT: ${PORT}`);
 });
 
-app.use(express.static(path.join(__dirname, "/react-frontend/build")));
+app.use(express.static(path.join(__dirname, "./client/build")));
 app.get("*", function (_, res) {
   res.sendFile(
-    path.join(__dirname, "/react-frontend/build/index.html"),
+    path.join(__dirname, "./client/build/index.html"),
     function (err) {
       res.status(500).send(err);
     }
