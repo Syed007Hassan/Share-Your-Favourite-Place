@@ -4,6 +4,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 
 const HttpError = require("./models/http-error");
@@ -13,6 +14,7 @@ const usersRoutes = require("./routes/users-routes");
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -53,15 +55,3 @@ app.use((error, req, res, next) => {
 });
 
 module.exports = app;
-
-// const http = require("http");
-
-// let port = 3000;
-
-// const server = http.createServer((req, res) => {
-//   console.log("Server is running on port " + port);
-//   console.log(req.method, req.url);
-//   res.end("Hello World");
-// });
-
-// server.listen(port);

@@ -5,7 +5,19 @@ const path = require("path");
 
 mongoose.set("strictQuery", false);
 
-let PORT = process.env.PORT || 9000;
+// serving the frontend
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "./client/build/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
+
+let PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   //connect to MongoDB by specifying port to access MongoDB server
@@ -22,14 +34,4 @@ app.listen(PORT, () => {
   }
 
   console.log(`Node server is running on PORT: ${PORT}`);
-});
-
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./client/build/index.html"),
-    function (err) {
-      res.status(500).send(err);
-    }
-  );
 });
