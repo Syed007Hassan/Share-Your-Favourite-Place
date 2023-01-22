@@ -5,9 +5,9 @@ const path = require("path");
 
 mongoose.set("strictQuery", false);
 
-// PORT
+let PORT = process.env.PORT || 9000;
 
-app.listen(process.env.PORT || 9000, () => {
+app.listen(PORT, () => {
   //connect to MongoDB by specifying port to access MongoDB server
   main().catch((err) => console.log(err));
 
